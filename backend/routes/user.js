@@ -1,35 +1,48 @@
+/* eslint-env node */
 const express = require("express");
 const router = express.Router();
+const { login, register } = require("../controllers/user");
 
-//route to register user .
+/**
+ * @description Route to register a user
+ * @route POST /api/user/register
+ */
+router.post("/register", register);
 
-router.post("/login", (req, res) => {
-  res.send("this is the post route on login");
-});
-//route to logging the user .
+/**
+ * @description Route to log in a user
+ * @route POST /api/user/login
+ */
+router.post("/login", login);
 
-router.post("/register", (req, res) => {
-  res.send("this is the post route on register");
-});
-
-//route to updating the profile details
-
-router.put("/updateProfile", (req, res) => {
+/**
+ * @description Route to update user profile details
+ * @route PUT /api/user/updateProfile
+ */
+router.put("/:id/updateProfile", (req, res) => {
   res.send("this is the PUT route to update user details");
 });
 
-//route to update the password
-
+/**
+ * @description Route to update user password
+ * @route PUT /api/user/updatePassword
+ */
 router.put("/updatePassword", (req, res) => {
-  res.send("this is the password upated route");
+  res.send("this is the password updated route");
 });
 
-//route to update the user interests
+/**
+ * @description Route to update user interests
+ * @route PUT /api/user/updateInterests
+ */
 router.put("/updateInterests", (req, res) => {
   res.send("this is the route for updating user interests");
 });
-//route to get the follower details .
 
+/**
+ * @description Route to get user's follower details
+ * @route GET /api/user/followers
+ */
 router.get("/followers", (req, res) => {
   res.send("this is the route for getting user's followers data");
 });

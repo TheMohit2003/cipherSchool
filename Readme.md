@@ -1,1 +1,1 @@
-# SchiperSchool Fullstack Internship Project
+# CchiperSchool Fullstack Internship Project

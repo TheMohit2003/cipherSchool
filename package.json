@@ -1,0 +1,18 @@
+{
+  "name": "cipherschool",
+  "version": "1.0.0",
+  "description": "this is a fullstack clone of CipherSchools",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "frontend": "cd frontend && npm run dev",
+    "backend":"cd backend && npm run server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "nodemon": "^2.0.22"
+  }
+}

@@ -1,0 +1,7 @@
+# Ignore artifacts:
+build
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+.cache

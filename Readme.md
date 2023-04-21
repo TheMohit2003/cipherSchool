@@ -1,0 +1,1 @@
+# SchiperSchool Fullstack Internship Project

@@ -1,6 +1,7 @@
 /* eslint-env node */
 const User = require("../models/userModel");
 const Profile = require("../models/userProfile");
+const Follower = require("../models/userFollower");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -167,10 +168,34 @@ const updateInterest = async (req, res) => {
   }
 };
 
+const getFollowers = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    // Find the user's followers
+    const followers = await Follower.find({ userId: id }).populate("follower");
+
+    res.status(200).json({
+      success: true,
+      message: "Followers retrieved successfully",
+      followers,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Error retrieving followers",
+      error: error.message,
+    });
+  }
+};
+
+
 module.exports = {
   register,
   login,
   updateProfile,
   updatePassword,
   updateInterest,
+  getFollowers,
 };

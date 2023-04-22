@@ -7,6 +7,7 @@ const {
   updateProfile,
   updatePassword,
   updateInterest,
+  getFollowers,
 } = require("../controllers/user");
 
 /**
@@ -43,8 +44,8 @@ router.put("/:id/updateInterests", updateInterest);
  * @description Route to get user's follower details
  * @route GET /api/user/followers
  */
-router.get("/followers", (req, res) => {
-  res.send("this is the route for getting user's followers data");
-});
+router.get("/:id/followers", getFollowers);
+
+
 
 module.exports = router;

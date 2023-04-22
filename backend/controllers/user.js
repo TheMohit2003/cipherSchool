@@ -1,5 +1,6 @@
 /* eslint-env node */
-const User = require("../models/user");
+const User = require("../models/userModel");
+const Profile = require("../models/userProfile");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -55,4 +56,53 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+
+
+const updateProfile = async (req, res) => {
+  try {
+    // Get the user ID from the request object
+    const userId = req.params.id;
+
+    // Find the profile for the given user
+    let profile = await Profile.findOne({ user: userId });
+
+    // If the profile doesn't exist, create a new one
+    if (!profile) {
+      profile = new Profile({
+        user: userId,
+      });
+    }
+
+    // Update the profile with the values from the request body
+    if (req.body.about) {
+      profile.about = req.body.about;
+    }
+    if (req.body.links) {
+      profile.links = req.body.links;
+    }
+    if (req.body.professionalInfo) {
+      profile.professionalInfo = req.body.professionalInfo;
+    }
+    if (req.body.interests) {
+      profile.interests = req.body.interests;
+    }
+
+    // Save the updated profile to the database
+    await profile.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      profile,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Error updating profile",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { register, login,updateProfile };

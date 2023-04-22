@@ -56,7 +56,6 @@ const login = async (req, res) => {
   }
 };
 
-
 const updateProfile = async (req, res) => {
   try {
     // Get the user ID from the request object
@@ -104,15 +103,15 @@ const updateProfile = async (req, res) => {
   }
 };
 
-const updatePassword = async(req,res)=>{
+const updatePassword = async (req, res) => {
   try {
     // Get the user ID from the request object
     const userId = req.params.id;
-    const {password} = req.body;
+    const { password } = req.body;
     //searcg for the user
-    const user = await User.findOne({_id:userId});
-    
-    if(!user){
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
       return res.status(400).json({ msg: "Invalid userId" });
     }
     const salt = await bcrypt.genSalt(10);
@@ -120,11 +119,10 @@ const updatePassword = async(req,res)=>{
 
     await user.save();
     res.status(200).json({
-      success:true,
-      message:"Password updated",
-      user
+      success: true,
+      message: "Password updated",
+      user,
     });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -135,4 +133,44 @@ const updatePassword = async(req,res)=>{
   }
 };
 
-module.exports = { register, login,updateProfile,updatePassword };
+const updateInterest = async (req, res) => {
+  try {
+    // Get the user ID from the request object
+    const userId = req.params.id;
+
+    // Find the profile for the given user
+    const profile = await Profile.findOne({ user: userId });
+    if (!profile) {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
+
+    // Update the interests with the values from the request body
+    if (req.body.interests) {
+      profile.interests = req.body.interests;
+    }
+
+    // Save the updated profile to the database
+    await profile.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Interests updated successfully",
+      profile,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Error updating interests",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = {
+  register,
+  login,
+  updateProfile,
+  updatePassword,
+  updateInterest,
+};

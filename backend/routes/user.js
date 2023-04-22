@@ -1,8 +1,13 @@
 /* eslint-env node */
 const express = require("express");
 const router = express.Router();
-const { login, register ,updateProfile , updatePassword } = require("../controllers/user");
-
+const {
+  login,
+  register,
+  updateProfile,
+  updatePassword,
+  updateInterest,
+} = require("../controllers/user");
 
 /**
  * @description Route to register a user
@@ -15,7 +20,6 @@ router.post("/register", register);
  * @route POST /api/user/login
  */
 router.post("/login", login);
-
 
 /**
  * @description Route to update user profile details
@@ -33,9 +37,7 @@ router.put("/:id/updatePassword", updatePassword);
  * @description Route to update user interests
  * @route PUT /api/user/updateInterests
  */
-router.put("/updateInterests", (req, res) => {
-  res.send("this is the route for updating user interests");
-});
+router.put("/:id/updateInterests", updateInterest);
 
 /**
  * @description Route to get user's follower details

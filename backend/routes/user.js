@@ -46,6 +46,4 @@ router.put("/:id/updateInterests", updateInterest);
  */
 router.get("/:id/followers", getFollowers);
 
-
-
 module.exports = router;

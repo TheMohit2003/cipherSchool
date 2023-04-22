@@ -7,6 +7,12 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const SALT = process.env.SALT;
 
+/**
+ * Update the profile for a user
+ * @description - Registers user
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ */
 const register = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -33,6 +39,12 @@ const register = async (req, res) => {
   }
 };
 
+/**
+ * Update the profile for a user
+ * @description        - Logins user
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ */
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -57,6 +69,12 @@ const login = async (req, res) => {
   }
 };
 
+/**
+ * Update the profile for a user
+ * @description        - Updates User proifle data
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ */
 const updateProfile = async (req, res) => {
   try {
     // Get the user ID from the request object
@@ -104,6 +122,12 @@ const updateProfile = async (req, res) => {
   }
 };
 
+/**
+ * Update the profile for a user
+ * @description        - Updates User password data
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ */
 const updatePassword = async (req, res) => {
   try {
     // Get the user ID from the request object
@@ -134,6 +158,12 @@ const updatePassword = async (req, res) => {
   }
 };
 
+/**
+ * Update the profile for a user
+ * @description        - Updates User Interest data
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ */
 const updateInterest = async (req, res) => {
   try {
     // Get the user ID from the request object
@@ -168,6 +198,12 @@ const updateInterest = async (req, res) => {
   }
 };
 
+/**
+ * Update the profile for a user
+ * @description        - Gets user's profile data
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ */
 const getFollowers = async (req, res) => {
   try {
     const id = req.params.id;
@@ -189,7 +225,6 @@ const getFollowers = async (req, res) => {
     });
   }
 };
-
 
 module.exports = {
   register,

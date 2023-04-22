@@ -10,6 +10,6 @@ const followerSchema = mongoose.Schema({
   },
 });
 
-const follower = new mongoose.model("follower",followerSchema);
+const follower = new mongoose.model("follower", followerSchema);
 
 module.exports = follower;

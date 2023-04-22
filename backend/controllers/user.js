@@ -57,7 +57,6 @@ const login = async (req, res) => {
 };
 
 
-
 const updateProfile = async (req, res) => {
   try {
     // Get the user ID from the request object
@@ -105,4 +104,35 @@ const updateProfile = async (req, res) => {
   }
 };
 
-module.exports = { register, login,updateProfile };
+const updatePassword = async(req,res)=>{
+  try {
+    // Get the user ID from the request object
+    const userId = req.params.id;
+    const {password} = req.body;
+    //searcg for the user
+    const user = await User.findOne({_id:userId});
+    
+    if(!user){
+      return res.status(400).json({ msg: "Invalid userId" });
+    }
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+
+    await user.save();
+    res.status(200).json({
+      success:true,
+      message:"Password updated",
+      user
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Error updating profile",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { register, login,updateProfile,updatePassword };
